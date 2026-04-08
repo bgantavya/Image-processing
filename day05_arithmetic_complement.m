@@ -3,8 +3,16 @@ clear;
 close all;
 
 %% Day 05: Arithmetic Operations and Complement
+% THEORY (short):
+% Arithmetic operations adjust intensity values:
+% - Addition increases brightness
+% - Subtraction decreases brightness
+% Complement inverts intensities (bright <-> dark for grayscale).
 
+% Part A: Arithmetic on a single image
 a = imread('onion.png');
+
+% Add and subtract constant intensity value
 add_img = imadd(a, 75);
 sub_img = imsubtract(a, 75);
 
@@ -33,10 +41,14 @@ subplot(3, 2, 6);
 imhist(sub_img);
 title('Histogram -75');
 
+% Part B: Arithmetic between two images
 img1 = imread('cameraman.tif');
 img2 = imread('rice.png');
+
+% Resize second image to match first image size
 img2_resize = imresize(img2, size(img1));
 
+% Pixel-wise addition and subtraction
 img_add = imadd(img1, img2_resize);
 img_sub = imsubtract(img1, img2_resize);
 
@@ -57,6 +69,7 @@ subplot(2, 2, 4);
 imshow(img_sub);
 title('Subtraction');
 
+% Part C: Image complement (negative in uint8 domain)
 img_comp = imcomplement(img1);
 
 figure('Name', 'Day 05 - Image Complement', 'NumberTitle', 'off');
